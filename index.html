@@ -78,6 +78,17 @@ body {
 
 .section {
     margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+/* subtle line between sections except last */
+.section:not(:last-child)::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: #ccc;
+    margin-top: 20px;
 }
 
 .section h2 {
@@ -110,10 +121,9 @@ body {
         <div class="section-left">
             <h3>KEAHLIAN</h3>
             <ul>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-                <li>MySQL</li>
+                <li>💻 HTML</li>
+                <li>🎨 CSS</li>
+                <li>🗄️ MySQL</li>
             </ul>
         </div>
 
@@ -152,6 +162,11 @@ body {
             <p><span class="bold">SMP</span> — [SMPN 12 KONAWE SELATAN] (2018–2021)</p>
             <p><span class="bold">SMA</span> — [SMAN 5 KENDARI] (2021–2024)</p>
             <p><span class="bold">Universitas Halu Oleo</span> — Ilmu Komputer (2024–Sekarang)</p>
+        </div>
+
+        <div class="section">
+            <h2>PROYEK</h2>
+            <p>Website CV Pribadi — HTML & CSS</p>
         </div>
 
         <div class="section">
