@@ -65,6 +65,15 @@ body {
     font-size: 17px;
 }
 
+.section-left ul li {
+    transition: color 0.3s, transform 0.3s;
+}
+
+.section-left ul li:hover {
+    color: #ffd700;
+    transform: translateX(5px);
+}
+
 /* KANAN */
 .right {
     width: 65%;
@@ -80,6 +89,7 @@ body {
     margin-bottom: 40px;
     position: relative;
     padding-bottom: 20px;
+    transition: background 0.3s, transform 0.3s;
 }
 
 /* subtle line between sections except last */
@@ -89,6 +99,11 @@ body {
     height: 1px;
     background: #ccc;
     margin-top: 20px;
+}
+
+.section:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
 }
 
 .section h2 {
