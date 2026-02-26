@@ -118,6 +118,26 @@ body {
     margin-bottom: 10px;
 }
 
+/* mobile responsiveness: single column layout */
+@media (max-width: 768px) {
+    .cv {
+        flex-direction: column;
+        height: auto;
+    }
+    .left,
+    .right {
+        width: 100%;
+        padding: 40px 30px;
+    }
+    .left {
+        order: 2;
+    }
+    .right {
+        order: 1;
+        padding-top: 30px;
+    }
+}
+
 .bold {
     font-weight: bold;
 }
