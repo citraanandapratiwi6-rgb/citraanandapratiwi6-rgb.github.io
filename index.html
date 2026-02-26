@@ -1,52 +1,155 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - Citra Ananda Pratiwi</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            line-height: 1.6;
-        }
-        h1, h2 {
-            color: #2c3e50;
-        }
-        hr {
-            margin: 20px 0;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV - Citra Ananda Pratiwi</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f6f8;
+    padding: 30px;
+}
+
+.cv-container {
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* PANEL KIRI */
+.left {
+    width: 35%;
+    background: #274c5e;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    margin-bottom: 15px;
+}
+
+.name {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.role {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.section-title-left {
+    font-size: 16px;
+    margin: 25px 0 10px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 5px;
+}
+
+.left ul {
+    list-style: none;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* PANEL KANAN */
+.right {
+    width: 65%;
+    padding: 30px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.info-list {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.info-list li {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.education li {
+    margin-bottom: 8px;
+}
+
+</style>
 </head>
+
 <body>
 
-    <h1>Curriculum Vitae</h1>
+<div class="cv-container">
 
-    <h2>Data Pribadi</h2>
-    <ul>
-        <li><strong>Nama:</strong> Citra Ananda Pratiwi</li>
-        <li><strong>Tempat, Tanggal Lahir:</strong> [19 Januari 2007]</li>
-        <li><strong>Alamat:</strong> [Desa Puosu jaya, Kec. Konda]</li>
-        <li><strong>Email:</strong> [citraanandapratiwi6@gmail.com]</li>
-        <li><strong>No. HP:</strong> [085352562316]</li>
-    </ul>
+    <!-- KIRI -->
+    <div class="left">
+        <img src="foto.jpg" alt="Foto Profil" class="profile-img">
 
-    <hr>
+        <div class="name">Citra Ananda Pratiwi</div>
+        <div class="role">Mahasiswa Ilmu Komputer</div>
 
-    <h2>Pendidikan</h2>
-    <ul>
-        <li>[Universitas Halu Oleo – [Ilmu Komputer] (2024)</li>
-    </ul>
+        <div class="section-title-left">KEAHLIAN</div>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>MySQL</li>
+        </ul>
 
-    <hr>
+        <div class="section-title-left">KONTAK</div>
+        <ul>
+            <li>📞 085352562316</li>
+            <li>📧 citraanandapratiwi6@gmail.com</li>
+            <li>📍 Puosu Jaya, Konda</li>
+        </ul>
+    </div>
 
-    <h2>Keahlian</h2>
-    <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JavaScript</li>
-        <li>Database (MySQL)</li>
-    </ul>
+    <!-- KANAN -->
+    <div class="right">
+
+        <div class="section-title">DATA PRIBADI</div>
+        <ul class="info-list">
+            <li><strong>Nama:</strong> Citra Ananda Pratiwi</li>
+            <li><strong>Tanggal Lahir:</strong> 19 Januari 2007</li>
+            <li><strong>Alamat:</strong> Desa Puosu Jaya, Kec. Konda</li>
+            <li><strong>Email:</strong> citraanandapratiwi6@gmail.com</li>
+            <li><strong>No. HP:</strong> 085352562316</li>
+        </ul>
+
+        <div class="section-title">PENDIDIKAN</div>
+        <ul class="info-list education">
+            <li><strong>Universitas Halu Oleo</strong> — Ilmu Komputer (2024–Sekarang)</li>
+        </ul>
+
+    </div>
+
+</div>
 
 </body>
 </html>
