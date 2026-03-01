@@ -141,10 +141,69 @@ body {
 .bold {
     font-weight: bold;
 }
+
+/* NAVBAR */
+nav {
+    background: #1a3a4a;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ffd700;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
 </style>
 </head>
 
 <body>
+
+<nav>
+    <div class="logo">Citra Ananda Pratiwi</div>
+    <ul>
+        <li><a href="#profil">Profil</a></li>
+        <li><a href="#pendidikan">Pendidikan</a></li>
+        <li><a href="#proyek">Proyek</a></li>
+        <li><a href="#hubungi">Hubungi</a></li>
+    </ul>
+</nav>
 
 <div class="cv">
 
@@ -177,13 +236,13 @@ body {
     <!-- KANAN -->
     <div class="right">
 
-        <div class="section">
+        <div class="section" id="profil">
             <h2>PROFIL</h2>
             <p>Saya Citra Ananda Pratiwi, Mahasiswa Universitas Halu Oleo aktif di Program Studi Ilmu Komputer yang memiliki minat pada pengembangan web dan teknologi informasi. 
                 Mampu bekerja sama dalam tim, memiliki kemampuan belajar cepat, dan bertanggung jawab dalam menyelesaikan tugas.</p>
         </div>
 
-        <div class="section">
+        <div class="section" id="pendidikan">
             <h2>PENDIDIKAN</h2>
             <p><span class="bold">SD</span> — SDN 2 KONDA (2012–2018)</p>
             <p><span class="bold">SMP</span> — SMPN 12 KONAWE SELATAN (2018–2021)</p>
@@ -191,13 +250,13 @@ body {
             <p><span class="bold">Universitas Halu Oleo</span> — Ilmu Komputer (2024–Sekarang)</p>
         </div>
 
-        <div class="section">
+        <div class="section" id="proyek">
             <h2>PROYEK</h2>
             <p>Website Portofolio Pribadi — HTML & CSS.</p>
             <p>Situs ini menampilkan ringkasan pengalaman, proyek, dan keterampilan saya, serta kontak untuk perekrut atau pengunjung yang ingin bekerja sama</p>
         </div>
 
-        <div class="section">
+        <div class="section" id="hubungi">
             <h2>HUBUNGI SAYA</h2>
             <p>Jika ingin menghubungi saya, silakan kirim email ke <span class="bold">citraanandapratiwi6@gmail.com</span> atau kunjungi profil GitHub saya: <a href="https://github.com/citraanandapratiwi6-rgb" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;"><span class="bold">citraanandapratiwi6-rgb</span></a>.</p>
         </div>
