@@ -1,268 +1,328 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CV - Citra Ananda Pratiwi</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #e9ecef;
-    height: 100vh;
-}
-
-.cv {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-}
-
-/* KIRI */
-.left {
-    width: 35%;
-    background: #2f5564;
-    color: white;
-    padding: 60px 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.name {
-    font-size: 34px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.role {
-    font-size: 18px;
-    opacity: 0.9;
-    margin-bottom: 40px;
-}
-
-.section-left {
-    margin-top: 30px;
-}
-
-.section-left h3 {
-    font-size: 20px;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.3);
-    padding-bottom: 8px;
-}
-
-.section-left ul {
-    list-style: none;
-    line-height: 2;
-    font-size: 17px;
-}
-
-.section-left ul li {
-    transition: color 0.3s, transform 0.3s;
-}
-
-.section-left ul li:hover {
-    color: #ffd700;
-    transform: translateX(5px);
-}
-
-/* KANAN */
-.right {
-    width: 65%;
-    background: #f7f7f7;
-    padding: 70px 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    overflow-y: auto;
-}
-
-.section {
-    margin-bottom: 40px;
-    position: relative;
-    padding-bottom: 20px;
-    transition: background 0.3s, transform 0.3s;
-}
-
-/* subtle line between sections except last */
-.section:not(:last-child)::after {
-    content: "";
-    display: block;
-    height: 1px;
-    background: #ccc;
-    margin-top: 20px;
-}
-
-.section:hover {
-    background: #f0f0f0;
-    transform: translateY(-2px);
-}
-
-.section h2 {
-    color: #2f5564;
-    margin-bottom: 20px;
-    font-size: 26px;
-    letter-spacing: 1px;
-}
-
-.section p {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-/* mobile responsiveness: single column layout */
-@media (max-width: 768px) {
-    .cv {
-        flex-direction: column;
-        height: auto;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To‑Do List</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --card: #ffffff;
+      --primary: #2f5564;
+      --primary-2: #19647e;
+      --accent: #ffb703;
+      --text: #1f2a37;
+      --muted: #6b7a8f;
+      --shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
     }
-    .left,
-    .right {
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI Emoji",
+        "Segoe UI Symbol", sans-serif;
+      background: radial-gradient(circle at top, rgba(25, 100, 126, 0.25), transparent 55%),
+        var(--bg);
+      min-height: 100vh;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .app {
+      width: min(520px, 100%);
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    header {
+      padding: 28px 26px 22px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+    }
+
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 1.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.95rem;
+      opacity: 0.87;
+    }
+
+    .controls {
+      padding: 22px 26px 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .controls input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(31, 42, 55, 0.18);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .controls input:focus {
+      border-color: rgba(25, 100, 126, 0.7);
+      box-shadow: 0 0 0 3px rgba(25, 100, 126, 0.12);
+    }
+
+    .controls button {
+      padding: 14px 18px;
+      border: none;
+      border-radius: 12px;
+      background: var(--accent);
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, filter 0.15s;
+    }
+
+    .controls button:active {
+      transform: scale(0.97);
+      filter: brightness(0.9);
+    }
+
+    .list {
+      padding: 0 26px 26px;
+      min-height: 260px;
+    }
+
+    .list:empty {
+      padding-top: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .task {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 14px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(31, 42, 55, 0.12);
+      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 6px 12px rgba(31, 42, 55, 0.05);
+      transition: transform 0.15s;
+    }
+
+    .task:hover {
+      transform: translateY(-1px);
+    }
+
+    .task input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary-2);
+      cursor: pointer;
+    }
+
+    .task label {
+      flex: 1;
+      font-size: 1rem;
+      word-break: break-word;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .task.completed label {
+      color: rgba(31, 42, 55, 0.55);
+      text-decoration: line-through;
+    }
+
+    .task button {
+      border: none;
+      background: transparent;
+      color: rgba(31, 42, 55, 0.6);
+      font-size: 1.05rem;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 10px;
+      transition: background 0.15s;
+    }
+
+    .task button:hover {
+      background: rgba(25, 100, 126, 0.12);
+    }
+
+    .footer {
+      padding: 18px 26px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(31, 42, 55, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .footer small {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .controls button {
         width: 100%;
-        padding: 40px 30px;
+      }
     }
-    .left {
-        order: 2;
-    }
-    .right {
-        order: 1;
-        padding-top: 30px;
-    }
-}
-
-.bold {
-    font-weight: bold;
-}
-
-/* NAVBAR */
-nav {
-    background: #1a3a4a;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    letter-spacing: 1px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #ffd700;
-}
-
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        gap: 15px;
-    }
-    nav ul {
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-</style>
+  </style>
 </head>
 
 <body>
+  <main class="app" aria-label="To-Do List">
+    <header>
+      <h1>To‑Do List</h1>
+      <p>Tambahkan tugas baru, centang saat selesai, dan simpan secara otomatis di browser.</p>
+    </header>
 
-<nav>
-    <div class="logo">Citra Ananda Pratiwi</div>
-    <ul>
-        <li><a href="#profil">Profil</a></li>
-        <li><a href="#pendidikan">Pendidikan</a></li>
-        <li><a href="#proyek">Proyek</a></li>
-        <li><a href="#hubungi">Hubungi</a></li>
-    </ul>
-</nav>
+    <section class="controls">
+      <input id="newTask" type="text" placeholder="Tambahkan tugas baru..." autocomplete="off" />
+      <button id="addBtn" type="button">Tambah</button>
+    </section>
 
-<div class="cv">
+    <section id="taskList" class="list" aria-label="Daftar tugas"></section>
 
-    <!-- KIRI -->
-    <div class="left">
-        <div class="name">Citra Ananda Pratiwi</div>
-        <div class="role">Mahasiswa Ilmu Komputer</div>
-
-        <div class="section-left">
-            <h3>KEAHLIAN</h3>
-            <ul>
-                <li>🐍 Python</li>
-                <li>👨🏻‍💻 C++</li>
-                <li>💻 HTML</li>
-                <li>🎨 CSS</li>
-                <li>🗄️ MySQL</li>
-            </ul>
-        </div>
-
-        <div class="section-left">
-            <h3>KONTAK</h3>
-            <ul>
-                <li>✉️ citraanandapratiwi6@gmail.com</li>
-                <li>📍 Konawe Selatan</li>
-                <li>🐙 GitHub: <a href="https://github.com/citraanandapratiwi6-rgb" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">citraanandapratiwi6-rgb</a></li>
-            </ul>
-        </div>
+    <div class="footer">
+      <small>Tekan Enter untuk menambahkan tugas.</small>
+      <small id="stats"></small>
     </div>
+  </main>
 
-    <!-- KANAN -->
-    <div class="right">
+  <script>
+    const KEY = "todoList_v1";
+    const taskListEl = document.getElementById("taskList");
+    const newTaskInput = document.getElementById("newTask");
+    const addBtn = document.getElementById("addBtn");
+    const statsEl = document.getElementById("stats");
 
-        <div class="section" id="profil">
-            <h2>PROFIL</h2>
-            <p>Saya Citra Ananda Pratiwi, Mahasiswa Universitas Halu Oleo aktif di Program Studi Ilmu Komputer yang memiliki minat pada pengembangan web dan teknologi informasi. 
-                Mampu bekerja sama dalam tim, memiliki kemampuan belajar cepat, dan bertanggung jawab dalam menyelesaikan tugas.</p>
-        </div>
+    let tasks = [];
 
-        <div class="section" id="pendidikan">
-            <h2>PENDIDIKAN</h2>
-            <p><span class="bold">SD</span> — SDN 2 KONDA (2012–2018)</p>
-            <p><span class="bold">SMP</span> — SMPN 12 KONAWE SELATAN (2018–2021)</p>
-            <p><span class="bold">SMA</span> — SMAN 5 KENDARI (2021–2024)</p>
-            <p><span class="bold">Universitas Halu Oleo</span> — Ilmu Komputer (2024–Sekarang)</p>
-        </div>
+    function loadTasks() {
+      try {
+        const saved = localStorage.getItem(KEY);
+        tasks = saved ? JSON.parse(saved) : [];
+      } catch (error) {
+        tasks = [];
+      }
+    }
 
-        <div class="section" id="proyek">
-            <h2>PROYEK</h2>
-            <p>Website Portofolio Pribadi — HTML & CSS.</p>
-            <p>Situs ini menampilkan ringkasan pengalaman, proyek, dan keterampilan saya, serta kontak untuk perekrut atau pengunjung yang ingin bekerja sama</p>
-        </div>
+    function saveTasks() {
+      localStorage.setItem(KEY, JSON.stringify(tasks));
+    }
 
-        <div class="section" id="hubungi">
-            <h2>HUBUNGI SAYA</h2>
-            <p>Jika ingin menghubungi saya, silakan kirim email ke <span class="bold">citraanandapratiwi6@gmail.com</span> atau kunjungi profil GitHub saya: <a href="https://github.com/citraanandapratiwi6-rgb" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;"><span class="bold">citraanandapratiwi6-rgb</span></a>.</p>
-        </div>
-    </div>
+    function renderTasks() {
+      taskListEl.innerHTML = "";
 
-</div>
+      if (tasks.length === 0) {
+        taskListEl.textContent = "Belum ada tugas. Tambahkan tugas di atas.";
+        updateStats();
+        return;
+      }
 
+      tasks.forEach((task) => {
+        const item = document.createElement("div");
+        item.className = "task" + (task.done ? " completed" : "");
+        item.dataset.id = task.id;
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = task.done;
+        checkbox.setAttribute("aria-label", "Selesai");
+
+        const label = document.createElement("label");
+        label.textContent = task.text;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.type = "button";
+        deleteBtn.title = "Hapus tugas";
+        deleteBtn.textContent = "🗑";
+
+        item.append(checkbox, label, deleteBtn);
+        taskListEl.appendChild(item);
+      });
+
+      updateStats();
+    }
+
+    function updateStats() {
+      const total = tasks.length;
+      const done = tasks.filter((t) => t.done).length;
+      statsEl.textContent = `${done} dari ${total} tugas selesai`;
+    }
+
+    function addTask(text) {
+      const trimmed = text.trim();
+      if (!trimmed) return;
+      tasks.unshift({ id: Date.now().toString(), text: trimmed, done: false });
+      saveTasks();
+      renderTasks();
+      newTaskInput.value = "";
+      newTaskInput.focus();
+    }
+
+    function toggleTask(id) {
+      const task = tasks.find((t) => t.id === id);
+      if (!task) return;
+      task.done = !task.done;
+      saveTasks();
+      renderTasks();
+    }
+
+    function removeTask(id) {
+      tasks = tasks.filter((t) => t.id !== id);
+      saveTasks();
+      renderTasks();
+    }
+
+    addBtn.addEventListener("click", () => addTask(newTaskInput.value));
+
+    newTaskInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        addTask(newTaskInput.value);
+      }
+    });
+
+    taskListEl.addEventListener("click", (event) => {
+      const item = event.target.closest(".task");
+      if (!item) return;
+      const id = item.dataset.id;
+
+      if (event.target.matches("input[type='checkbox']")) {
+        toggleTask(id);
+      }
+
+      if (event.target.matches("button")) {
+        removeTask(id);
+      }
+    });
+
+    loadTasks();
+    renderTasks();
+  </script>
 </body>
 </html>
