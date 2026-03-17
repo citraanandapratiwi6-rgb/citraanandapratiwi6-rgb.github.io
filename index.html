@@ -213,7 +213,7 @@
     .controls {
       padding: 22px 26px 18px;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1fr minmax(170px, 200px) auto;
       gap: 12px;
       align-items: center;
     }
@@ -370,7 +370,7 @@
 
 <body>
   <div id="dashboard" class="dashboard">
-    <h1>📊 To-Do List</h1>
+    <h1>To-Do List</h1>
     <p>Kelola tugas harian Anda dengan mudah</p>
 
     
@@ -409,6 +409,7 @@
 
     <section class="controls">
       <input id="newTask" type="text" placeholder="Tambahkan tugas baru..." autocomplete="off" />
+      <input id="newTaskDate" type="date" aria-label="Tanggal deadline" />
       <button id="addBtn" type="button">Tambah</button>
     </section>
 
@@ -429,6 +430,7 @@
     const KEY = "todoList_v1";
     const taskListEl = document.getElementById("taskList");
     const newTaskInput = document.getElementById("newTask");
+    const newTaskDate = document.getElementById("newTaskDate");
     const addBtn = document.getElementById("addBtn");
     const statsEl = document.getElementById("stats");
     const progressFill = document.getElementById("progressFill");
@@ -475,9 +477,9 @@
         checkbox.setAttribute("aria-label", "Selesai");
 
         const label = document.createElement("label");
-        label.textContent = task.text;
         const icon = task.done ? "✅" : "📝";
-        label.textContent = `${icon} ${task.text}`;
+        const dueText = task.due ? ` ⏰ ${formatDueDate(task.due)}` : "";
+        label.textContent = `${icon} ${task.text}${dueText}`;
 
         const editBtn = document.createElement("button");
         editBtn.type = "button";
@@ -530,6 +532,17 @@
       pendingTasksEl.textContent = pending;
     }
 
+    function formatDueDate(value) {
+      if (!value) return "";
+      const date = new Date(value);
+      if (isNaN(date)) return value;
+      return date.toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+    }
+
     function showDashboard() {
       dashboard.style.display = "block";
       app.style.display = "none";
@@ -543,11 +556,13 @@
     function addTask(text) {
       const trimmed = text.trim();
       if (!trimmed) return;
-      tasks.unshift({ id: Date.now().toString(), text: trimmed, done: false });
+      const due = newTaskDate.value;
+      tasks.unshift({ id: Date.now().toString(), text: trimmed, due: due || null, done: false });
       saveTasks();
       updateDashboardStats();
       renderTasks();
       newTaskInput.value = "";
+      newTaskDate.value = "";
       newTaskInput.focus();
     }
 
@@ -568,46 +583,80 @@
       const label = item.querySelector("label");
       const editBtn = item.querySelector("button[title='Edit tugas']");
 
-      // Buat input field
-      const input = document.createElement("input");
-      input.type = "text";
-      input.value = task.text;
-      input.className = "edit-input";
-      input.style.flex = "1";
-      input.style.fontSize = "1rem";
-      input.style.border = "1px solid rgba(25, 100, 126, 0.7)";
-      input.style.borderRadius = "8px";
-      input.style.padding = "6px 8px";
-      input.style.outline = "none";
+      // Buat input field dan input tanggal
+      const wrapper = document.createElement("div");
+      wrapper.style.display = "flex";
+      wrapper.style.gap = "8px";
+      wrapper.style.flex = "1";
 
-      // Ganti label dengan input
-      label.replaceWith(input);
-      input.focus();
-      input.select();
+      const textInput = document.createElement("input");
+      textInput.type = "text";
+      textInput.value = task.text;
+      textInput.className = "edit-input";
+      textInput.style.flex = "1";
+      textInput.style.fontSize = "1rem";
+      textInput.style.border = "1px solid rgba(25, 100, 126, 0.7)";
+      textInput.style.borderRadius = "8px";
+      textInput.style.padding = "6px 8px";
+      textInput.style.outline = "none";
+
+      const dateInput = document.createElement("input");
+      dateInput.type = "date";
+      dateInput.value = task.due || "";
+      dateInput.style.width = "140px";
+      dateInput.style.border = "1px solid rgba(25, 100, 126, 0.4)";
+      dateInput.style.borderRadius = "8px";
+      dateInput.style.padding = "6px 8px";
+      dateInput.style.outline = "none";
+
+      wrapper.append(textInput, dateInput);
+
+      // Ganti label dengan wrapper input
+      label.replaceWith(wrapper);
+      textInput.focus();
+      textInput.select();
 
       // Fungsi untuk menyimpan
       const saveEdit = () => {
-        const newText = input.value.trim();
+        const newText = textInput.value.trim();
+        const newDue = dateInput.value;
+        let updated = false;
+
         if (newText && newText !== task.text) {
           task.text = newText;
+          updated = true;
+        }
+
+        if (newDue !== (task.due || "")) {
+          task.due = newDue || null;
+          updated = true;
+        }
+
+        if (updated) {
           saveTasks();
         }
+
         // Kembalikan ke label dengan ikon
-        input.replaceWith(label);
+        wrapper.replaceWith(label);
         const icon = task.done ? "✅" : "📝";
-        label.textContent = `${icon} ${task.text}`;
+        const dueText = task.due ? ` ⏰ ${formatDueDate(task.due)}` : "";
+        label.textContent = `${icon} ${task.text}${dueText}`;
       };
 
       // Event listeners
-      input.addEventListener("keydown", (e) => {
+      const handleSave = (e) => {
         if (e.key === "Enter") {
           saveEdit();
         } else if (e.key === "Escape") {
-          input.replaceWith(label);
+          wrapper.replaceWith(label);
         }
-      });
+      };
 
-      input.addEventListener("blur", saveEdit);
+      textInput.addEventListener("keydown", handleSave);
+      dateInput.addEventListener("keydown", handleSave);
+
+      textInput.addEventListener("blur", saveEdit);
+      dateInput.addEventListener("blur", saveEdit);
     }
 
     function removeTask(id) {
@@ -625,6 +674,12 @@
     addBtn.addEventListener("click", () => addTask(newTaskInput.value));
 
     newTaskInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        addTask(newTaskInput.value);
+      }
+    });
+
+    newTaskDate.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         addTask(newTaskInput.value);
       }
