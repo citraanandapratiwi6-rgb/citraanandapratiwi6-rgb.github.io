@@ -6,27 +6,27 @@
   <title>To‑Do List</title>
   <style>
     :root {
-      --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --bg-solid: #f8fafc;
+      --bg: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+      --bg-solid: #f0f9ff;
       --card: #ffffff;
-      --primary: #6366f1;
-      --primary-2: #4f46e5;
-      --primary-light: #a5b4fc;
-      --accent: #f59e0b;
-      --accent-light: #fed7aa;
+      --primary: #0ea5e9;
+      --primary-2: #0284c7;
+      --primary-light: #7dd3fc;
+      --accent: #06b6d4;
+      --accent-light: #67e8f9;
       --success: #10b981;
       --success-light: #d1fae5;
       --warning: #f59e0b;
       --warning-light: #fef3c7;
       --danger: #ef4444;
       --danger-light: #fee2e2;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --text-light: #94a3b8;
-      --border: #e2e8f0;
-      --border-light: #f1f5f9;
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-light: #64748b;
+      --border: #cbd5e1;
+      --border-light: #e2e8f0;
+      --shadow: 0 10px 25px rgba(14, 165, 233, 0.1);
+      --shadow-lg: 0 20px 40px rgba(14, 165, 233, 0.15);
     }
 
     * {
@@ -157,10 +157,57 @@
     }
 
     header p {
-      margin: 0;
+      margin: 0 0 20px;
       font-size: 1rem;
       opacity: 0.9;
       color: rgba(255, 255, 255, 0.9);
+    }
+
+    .progress-section {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 0;
+    }
+
+    .progress-section h3 {
+      margin: 0 0 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      opacity: 0.9;
+      color: white;
+    }
+
+    .progress-visual {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-visual {
+      flex: 1;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 10px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      font-weight: 700;
+      font-size: 1.1rem;
+      min-width: 45px;
+      text-align: right;
+      color: white;
     }
 
     .controls {
@@ -349,6 +396,15 @@
     <header>
       <h1>To‑Do List</h1>
       <p>Tambahkan tugas baru, centang saat selesai, dan simpan secara otomatis.</p>
+      <div class="progress-section">
+        <h3>Progress Tugas</h3>
+        <div class="progress-visual">
+          <div class="progress-bar-visual">
+            <div id="progressBarFill" class="progress-bar-fill"></div>
+          </div>
+          <div id="progressText" class="progress-text">0%</div>
+        </div>
+      </div>
     </header>
 
     <section class="controls">
@@ -376,6 +432,8 @@
     const addBtn = document.getElementById("addBtn");
     const statsEl = document.getElementById("stats");
     const progressFill = document.getElementById("progressFill");
+    const progressBarFill = document.getElementById("progressBarFill");
+    const progressText = document.getElementById("progressText");
     const dashboard = document.getElementById("dashboard");
     const enterBtn = document.getElementById("enterBtn");
     const totalTasksEl = document.getElementById("totalTasks");
@@ -438,6 +496,28 @@
       });
 
       updateStats();
+    }
+
+    function updateStats() {
+      const total = tasks.length;
+      const done = tasks.filter((t) => t.done).length;
+
+      // Update footer stats
+      if (statsEl) {
+        statsEl.textContent = `${done} dari ${total} tugas selesai`;
+      }
+
+      // Update progress bars
+      const percentage = total > 0 ? Math.round((done / total) * 100) : 0;
+      if (progressFill) {
+        progressFill.style.width = `${percentage}%`;
+      }
+      if (progressBarFill) {
+        progressBarFill.style.width = `${percentage}%`;
+      }
+      if (progressText) {
+        progressText.textContent = `${percentage}%`;
+      }
     }
 
     function updateDashboardStats() {
