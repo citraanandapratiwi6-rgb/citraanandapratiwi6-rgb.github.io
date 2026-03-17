@@ -6,14 +6,27 @@
   <title>To‑Do List</title>
   <style>
     :root {
-      --bg: #f3f6fb;
+      --bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --bg-solid: #f8fafc;
       --card: #ffffff;
-      --primary: #2f5564;
-      --primary-2: #19647e;
-      --accent: #ffb703;
-      --text: #1f2a37;
-      --muted: #6b7a8f;
-      --shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      --primary: #6366f1;
+      --primary-2: #4f46e5;
+      --primary-light: #a5b4fc;
+      --accent: #f59e0b;
+      --accent-light: #fed7aa;
+      --success: #10b981;
+      --success-light: #d1fae5;
+      --warning: #f59e0b;
+      --warning-light: #fef3c7;
+      --danger: #ef4444;
+      --danger-light: #fee2e2;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --border-light: #f1f5f9;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
 
     * {
@@ -24,8 +37,7 @@
       margin: 0;
       font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI Emoji",
         "Segoe UI Symbol", sans-serif;
-      background: radial-gradient(circle at top, rgba(25, 100, 126, 0.25), transparent 55%),
-        var(--bg);
+      background: var(--bg);
       min-height: 100vh;
       color: var(--text);
       display: flex;
@@ -37,29 +49,37 @@
     .app {
       width: min(520px, 100%);
       background: var(--card);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
       overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .dashboard {
       width: min(600px, 100%);
       background: var(--card);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
       padding: 40px 30px;
       text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .dashboard h1 {
       margin: 0 0 10px;
       color: var(--primary);
       font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .dashboard p {
       margin: 0 0 30px;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 1.1rem;
     }
 
@@ -71,58 +91,76 @@
     }
 
     .stat-card {
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 12px;
-      padding: 20px;
-      border: 1px solid rgba(31, 42, 55, 0.1);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border-light);
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
     }
 
     .stat-card h3 {
-      margin: 0 0 10px;
-      font-size: 2rem;
-      color: var(--primary);
+      margin: 0 0 8px;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .stat-card p {
       margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 500;
     }
 
     .dashboard button {
-      padding: 14px 28px;
+      padding: 16px 32px;
       border: none;
       border-radius: 12px;
-      background: var(--accent);
-      color: var(--text);
-      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--warning));
+      color: white;
+      font-weight: 600;
       font-size: 1.1rem;
       cursor: pointer;
-      transition: transform 0.15s, filter 0.15s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
     }
 
     .dashboard button:hover {
-      transform: scale(1.05);
-      filter: brightness(0.95);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+      filter: brightness(1.05);
     }
 
     header {
-      padding: 28px 26px 22px;
+      padding: 32px 26px 24px;
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
       color: white;
       position: relative;
     }
 
     header h1 {
-      margin: 0 0 6px;
-      font-size: 1.75rem;
+      margin: 0 0 8px;
+      font-size: 1.8rem;
       letter-spacing: 0.02em;
+      background: linear-gradient(135deg, white, rgba(255, 255, 255, 0.9));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     header p {
       margin: 0;
-      font-size: 0.95rem;
-      opacity: 0.87;
+      font-size: 1rem;
+      opacity: 0.9;
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .controls {
@@ -135,33 +173,40 @@
 
     .controls input {
       width: 100%;
-      padding: 14px 16px;
+      padding: 16px 18px;
       border-radius: 12px;
-      border: 1px solid rgba(31, 42, 55, 0.18);
+      border: 2px solid var(--border);
       font-size: 1rem;
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: all 0.3s ease;
+      background: var(--bg-solid);
     }
 
     .controls input:focus {
-      border-color: rgba(25, 100, 126, 0.7);
-      box-shadow: 0 0 0 3px rgba(25, 100, 126, 0.12);
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      background: white;
     }
 
     .controls button {
-      padding: 14px 18px;
+      padding: 16px 20px;
       border: none;
       border-radius: 12px;
-      background: var(--accent);
-      color: var(--text);
-      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      font-weight: 600;
       cursor: pointer;
-      transition: transform 0.15s, filter 0.15s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    }
+
+    .controls button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
     }
 
     .controls button:active {
-      transform: scale(0.97);
-      filter: brightness(0.9);
+      transform: translateY(0);
     }
 
     .list {
@@ -179,88 +224,85 @@
     .task {
       display: flex;
       align-items: center;
-      gap: 13px;
-      padding: 14px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(31, 42, 55, 0.12);
+      gap: 15px;
+      padding: 16px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
       margin-bottom: 12px;
-      background: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 6px 12px rgba(31, 42, 55, 0.05);
-      transition: transform 0.15s;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
     }
 
     .task:hover {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      border-color: var(--primary-light);
     }
 
     .task input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--primary-2);
+      width: 20px;
+      height: 20px;
+      accent-color: var(--success);
       cursor: pointer;
-    }
-
-    .task label {
-      flex: 1;
-      font-size: 1rem;
-      word-break: break-word;
-      cursor: pointer;
-      user-select: none;
+      border-radius: 4px;
     }
 
     .task.completed label {
-      color: rgba(31, 42, 55, 0.55);
+      color: var(--text-muted);
       text-decoration: line-through;
+      opacity: 0.7;
     }
 
     .task button {
       border: none;
       background: transparent;
-      color: rgba(31, 42, 55, 0.6);
-      font-size: 1.05rem;
+      color: var(--text-light);
+      font-size: 1.1rem;
       cursor: pointer;
-      padding: 6px;
-      border-radius: 10px;
-      transition: background 0.15s;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
     }
 
     .task button:hover {
-      background: rgba(25, 100, 126, 0.12);
+      background: var(--danger-light);
+      color: var(--danger);
+      transform: scale(1.1);
     }
 
     .footer {
-      padding: 18px 26px 20px;
+      padding: 20px 26px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-top: 1px solid rgba(31, 42, 55, 0.12);
-      background: rgba(255, 255, 255, 0.72);
+      border-top: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+      backdrop-filter: blur(5px);
     }
 
     .footer small {
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    .progress-container {
-      flex: 1;
-      margin: 0 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
     .progress-bar {
       width: 100%;
-      height: 8px;
-      background: rgba(31, 42, 55, 0.1);
-      border-radius: 4px;
+      height: 10px;
+      background: var(--border-light);
+      border-radius: 5px;
       overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--primary-2));
-      border-radius: 4px;
-      transition: width 0.3s ease;
+      background: linear-gradient(90deg, var(--success), var(--primary));
+      border-radius: 5px;
+      transition: width 0.4s ease;
       width: 0%;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
     }
 
     @media (max-width: 480px) {
@@ -281,8 +323,9 @@
 
 <body>
   <div id="dashboard" class="dashboard">
-    <h1>📊 Dashboard Tugas</h1>
+    <h1>📊 To-Do List</h1>
     <p>Kelola tugas harian Anda dengan mudah</p>
+
     
     <div class="stats-grid">
       <div class="stat-card">
@@ -305,7 +348,7 @@
   <main id="app" class="app" aria-label="To-Do List" style="display: none;">
     <header>
       <h1>To‑Do List</h1>
-      <p>Tambahkan tugas baru, centang saat selesai, dan simpan secara otomatis di browser.</p>
+      <p>Tambahkan tugas baru, centang saat selesai, dan simpan secara otomatis.</p>
     </header>
 
     <section class="controls">
