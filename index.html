@@ -352,17 +352,60 @@
       box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 600px) {
+      body {
+        padding: 24px 12px;
+      }
+
+      .dashboard {
+        width: 100%;
+        padding: 30px 20px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
       header h1 {
         font-size: 1.5rem;
+      }
+
+      .progress-section {
+        padding: 12px;
+      }
+
+      .progress-bar-visual {
+        height: 14px;
+      }
+
+      .progress-text {
+        min-width: 38px;
+        font-size: 1rem;
       }
 
       .controls {
         grid-template-columns: 1fr;
       }
 
+      .controls input,
       .controls button {
         width: 100%;
+      }
+
+      .controls input[type="date"] {
+        max-width: none;
+      }
+
+      .list {
+        padding: 0 16px 20px;
+      }
+
+      .task {
+        padding: 12px 12px;
+      }
+
+      .footer {
+        padding: 14px 16px 18px;
       }
     }
   </style>
